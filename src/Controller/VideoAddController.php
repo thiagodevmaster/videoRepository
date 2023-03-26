@@ -4,6 +4,7 @@ namespace Alura\Mvc\Controller;
 
 use Alura\Mvc\Entity\Video;
 use Alura\Mvc\Repository\VideoRepository;
+use finfo;
 
 class VideoAddController implements Controller
 {
@@ -22,7 +23,22 @@ class VideoAddController implements Controller
                 exit();
             }
 
-            if($this->repository->addVideo(new Video($url, $titulo)) === true){
+            $video = new Video($url, $titulo);
+            if($_FILES['image']['error'] === UPLOAD_ERR_OK){
+                $fInfo = new finfo(FILEINFO_MIME_TYPE);
+                $mimeType = $fInfo->file($_FILES['image']['tmp_name']);
+                
+                if(str_starts_with($mimeType, 'image/')){
+                    $fileTempName = uniqid('upload_') . '_' . pathinfo($_FILES['image']['name'], PATHINFO_BASENAME);
+                    move_uploaded_file(
+                        $_FILES['image']['tmp_name'],
+                        __DIR__ . '/../../public/img/uploads/' . $fileTempName
+                    );
+                    $video->setFilePath($fileTempName);
+                }
+            }
+
+            if($this->repository->addVideo($video) === true){
                 header("Location: /?sucesso=1");
             }else{
                 header("Location: /?sucesso=0");

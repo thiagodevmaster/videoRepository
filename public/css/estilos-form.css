@@ -23,6 +23,7 @@
     color: var(--azul-medio);
     font-weight: bold;
     font-size: 21px;
+    margin-top: 100px;
 }
 
 .campo__escrita {

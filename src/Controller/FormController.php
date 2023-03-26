@@ -4,7 +4,7 @@ namespace Alura\Mvc\Controller;
 
 use Alura\Mvc\Repository\VideoRepository;
 
-class FormController implements Controller
+class FormController extends ViewController implements Controller
 {
     public function __construct(private VideoRepository $repository)
     {
@@ -21,7 +21,9 @@ class FormController implements Controller
             $video = $this->repository->find($id);
         }
 
-        require_once __DIR__ . "/../../view/formulario.php";
+        $this->renderHTML('formulario', [
+            'video' => $video
+        ]);
 
     }
 }

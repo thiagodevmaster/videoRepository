@@ -5,7 +5,7 @@ namespace Alura\Mvc\Controller;
 use Alura\Mvc\Repository\VideoRepository;
 use PDO;
 
-class VideoListController implements Controller
+class VideoListController extends ViewController implements Controller
 {
 
     public function __construct(private VideoRepository $repository)
@@ -15,6 +15,8 @@ class VideoListController implements Controller
     public function processaRequisicao(): void
     {
         $video_list = $this->repository->allVideos();
-        require_once __DIR__ . "/../../view/video-list.php";
+        $this->renderHTML('video-list', [
+            'video_list' => $video_list
+        ]);
     }
 }
