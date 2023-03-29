@@ -9,6 +9,7 @@
     box-sizing: border-box;
 }
 
+
 body {
     font-family: Roboto, Arial, Helvetica, sans-serif;
     background-color: var(--azul-claro);
@@ -24,6 +25,10 @@ body {
 
 /* ESTILOS DO HEADER */
 
+header {
+    height: 80px;
+}
+
 .cabecalho {
     background-color: white;
     position: fixed;
@@ -35,8 +40,6 @@ body {
 }
 
 .logo {
-    background-image: url(../img/cabecalho/Logo.png);
-    background-repeat: no-repeat;
     padding: 15px 65px;
     cursor: pointer;
 }
@@ -100,6 +103,16 @@ body {
     border-left: none;
     padding: 15px 15px;
     cursor: pointer;
+}
+
+.formulario__titulo.erro {
+    color: red;
+    margin-top: 1rem;
+}
+
+.formulario__titulo.success{
+    color: green;
+    margin-top: 1rem;
 }
 
 @media(min-width: 834px) {

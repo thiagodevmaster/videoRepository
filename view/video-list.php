@@ -1,7 +1,6 @@
-<?php
-require_once __DIR__ . '/inicio-html.php';
+<?php 
+$this->layout('layout');
 /**@var \Alura\Mvc\Entity\Video[] $video_list*/
-
 ?>
 <ul class="videos__container" alt="videos alura">
     <?php foreach ($video_list as $video):?>
@@ -23,7 +22,9 @@ require_once __DIR__ . '/inicio-html.php';
                         <h3><?= $video->title;?></h3>
                         <div class="acoes-video">
                             <a href="/editar-video?id=<?= $video->id;?>">Editar</a>
-                            <a href="/remover-capa?id=<?= $video->id;?>">Remover Capa</a>
+                            <?php if($video->getFilePath() !== null):?>
+                                <a href="/remover-capa?id=<?= $video->id;?>">Remover Capa</a>
+                            <?php endif; ?>
                             <a href="/excluir-video?id=<?= $video->id;?>">Excluir</a>
                         </div>
                     </div>
@@ -31,5 +32,3 @@ require_once __DIR__ . '/inicio-html.php';
             <?php endif; ?>
     <?php endforeach;?>
 </ul>
-<?php
-require_once __DIR__ . '/fim-html.php';
